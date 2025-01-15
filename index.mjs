@@ -1,11 +1,12 @@
 import fs from "fs"
 const {data} = JSON.parse(fs.readFileSync(process.argv[2],"utf-8"))
-console.log(data)
+//console.log(data)
 
 const result = Object.groupBy(data.authLog, ( { ip } ) => ip);
-console.log(result)
+//console.log(result)
 
-
+//console.log("JSON")
+//console.log(JSON.stringify(result));
 // Levenshtein距離を計算する関数
     function levenshtein(str1, str2) {
        console.log(`Levenshtein距離計算: ${str1} と ${str2}`); // 計算前にログを出力
@@ -33,3 +34,19 @@ console.log(result)
        console.log(`計算結果: ${result}`);  // 計算結果をログに出力
        return result;
     }
+
+
+ for(const [ip, users] of Object.entries(result)){
+         const passwords = users.map(user => user.password)
+         console.log(passwords)
+         let levenResult = [];
+         for(let i=0; i+1<passwords.length; i++){
+             levenResult [i] = levenshtein(passwords[i],passwords[i+1]);
+         }
+         console.log(levenResult);
+         
+ }
+ 
+ 
+
+
