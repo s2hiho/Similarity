@@ -3,7 +3,7 @@ const {data} = JSON.parse(fs.readFileSync(process.argv[2],"utf-8"))
 //console.log(data)
 
 const result = Object.groupBy(data.authLog, ( { ip } ) => ip);
-//console.log(result)
+console.log(result)
 
 //console.log("JSON")
 //console.log(JSON.stringify(result));
@@ -12,8 +12,9 @@ const result = Object.groupBy(data.authLog, ( { ip } ) => ip);
        console.log(`Levenshtein距離計算: ${str1} と ${str2}`); // 計算前にログを出力
        const len1 = str1.length;
        const len2 = str2.length;
-       const dp = Array.from(Array(len1 + 1), () => Array(len2 + 1).fill(0));
+       const dp = Array.from(Array(len1 + 1), () => Array(len2 + 1).fill(0));  //配列の作成
 
+       //インデックスの作成
        for (let i = 0; i <= len1; i++) dp[i][0] = i;
        for (let j = 0; j <= len2; j++) dp[0][j] = j;
 
@@ -30,9 +31,13 @@ const result = Object.groupBy(data.authLog, ( { ip } ) => ip);
                }
            }
        }
-       const result = dp[len1][len2];
-       console.log(`計算結果: ${result}`);  // 計算結果をログに出力
-       return result;
+       const distance = dp[len1][len2];
+       console.log(`Levenshtein距離: ${distance}`);  // 計算結果をログに出力
+       
+       const maxLength = Math.max(len1, len2); //長い文字数を採用
+       const similarity = ((maxLength - distance) / maxLength) *100; //類似度
+       console.log(`類似度%: ${similarity}`);
+       return similarity.toFixed(2);  //小数点以下2桁で表示
     }
 
 
