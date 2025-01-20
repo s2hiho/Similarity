@@ -56,7 +56,9 @@ for(const [ip, users] of Object.entries(result)){
         console.log(levenResult);
         for(let i=0; i<levenResult.length; i++){
             average = average + levenResult [i] ;
+            count = count + 1 ;
         }
+
         average = average /levenResult.length;
         console.log(average);       //1回のみ入力は配列ないからNanと表示される
         //類似度0，100を除外したほうがよい？
