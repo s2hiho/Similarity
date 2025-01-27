@@ -6,7 +6,7 @@ const result = Object.groupBy(data.authLog, ( { ip } ) => ip);
 //console.log(result)
 
 let allAverage = 0;
-let allMiniute = 0;
+let allMinimum = 0;
 let allMax = 0;
 let countAve = 0;
 let countMin = 0;
@@ -52,68 +52,79 @@ let countMax = 0;
 
  for(const [ip, users] of Object.entries(result)){
          const passwords = users.map(user => user.password)
-         console.log(ip);
+         console.log(passwords)
+
+         if(passwords.length != 1){
+	 console.log(ip);
          let levenResult = [];
          for(let i=0; i+1<passwords.length; i++){
              levenResult [i] = levenshtein(passwords[i],passwords[i+1]);
  
          }
-         //console.log(`類似度の配列: ${levenResult}`);
+         console.log(`類似度の配列: ${levenResult}`);
  
-         let average = 0;
-         let miniute = 0;
-         let max = 0;
+         let average=0;
+         let minimum;
+         let max;
          
          //平均値の出力
          for(let i=0; i<levenResult.length; i++){
+             console.log(levenResult[i]);
+
              average = average + levenResult [i] ;
          }
  
          //最大値の出力
-         for(let i=0; i<levenResult.length; i++){
-                if(miniute != 0 && miniute > levenResult [i]){
-                        miniute = levenResult[i]
-                }
-         }
+         //for(let i=0; i<levenResult.length; i++){
+         //    console.log(levenResult[i]);
+         //       if(minimum != 0 && minimum > levenResult [i]){
+         //               minimum = levenResult[i]
+
+        //        }
+        // }
+
+         minimum=Math.min(levenResult)
  
  
          //最小値の出力
-         for(let i=0; i<levenResult.length; i++){
-                if(max != 100 && max < levenResult [i]){
-                        max = levenResult[i]
-                }
-         }
+        // for(let i=0; i<levenResult.length; i++){
+        //     console.log(levenResult[i]);
+        //        if(max != 100 && max < levenResult [i]){
+        //                max = levenResult[i]
+        //        }
+	// }
+        max=Math.max(levenResult) 
+	 
  
  
  
  
          average = average /levenResult.length;
          console.log(average);       //1回のみ入力は配列ないからNanと表示される
-         console.log(miniute);
+         console.log(minimum);
          console.log(max);
          //類似度0，100を除外したほうがよい？
+
          
-         if(isNaN(average) != false){
          allAverage=allAverage + average;
          countAve = countAve + 1;
-         }
  
-         if(miniute != 0){
-         allMiniute=allMiniute + miniute;
+         allMinimum=allMinimum + minimum;
          countMin = countMin + 1;
-         }
 
-         if(max != 100){
          allMax = allMax + max;
          countMax = countMax + 1;
+
          }
-
- }
-
+}
+     console.log(allAverage);
+     console.log(countAve);
+console.log(allMinimum);
+console.log(countMin)
      allAverage=allAverage/countAve;
-     allMiniute=allMiniute/countMin;
+     allMinimum=allMinimum/countMin;
      allMax=allMax/countMax;
 
      console.log(`平均値：${allAverage}`)
-     console.log(`最小値：${allMiniute}`)
+     console.log(`最小値：${allMinimum}`)
      console.log(`最大値：${allMax}`)
