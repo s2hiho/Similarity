@@ -11,6 +11,10 @@ let allMax = 0;
 let countAve = 0;
 let countMin = 0;
 let countMax = 0;
+let countArr = 0;
+let arrAve=[];
+let arrMin=[];
+let arrMax=[];
 
 //console.log("JSON")
 //console.log(JSON.stringify(result));
@@ -91,9 +95,21 @@ let countMax = 0;
 
          allMax = allMax + max;
          countMax = countMax + 1;
+         
+         arrAve[countArr]=average;
+         arrMin[countArr]=minimum;
+         arrMax[countArr]=max;
+         countArr ++;
 
          }
-}
+}    
+
+    console.log(allAverage);
+    console.log(countAve);
+    console.log(allMinimum);
+    console.log(countMin);
+    console.log(allMax);
+    console.log(countMax);
      allAverage=allAverage/countAve;
      allMinimum=allMinimum/countMin;
      allMax=allMax/countMax;
@@ -101,3 +117,4 @@ let countMax = 0;
      console.log(`平均値：${allAverage}`)
      console.log(`最小値：${allMinimum}`)
      console.log(`最大値：${allMax}`)
+     console.log(arrAve);
