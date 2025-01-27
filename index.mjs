@@ -69,41 +69,18 @@ let countMax = 0;
          
          //平均値の出力
          for(let i=0; i<levenResult.length; i++){
-             console.log(levenResult[i]);
 
              average = average + levenResult [i] ;
          }
  
-         //最大値の出力
-         //for(let i=0; i<levenResult.length; i++){
-         //    console.log(levenResult[i]);
-         //       if(minimum != 0 && minimum > levenResult [i]){
-         //               minimum = levenResult[i]
-
-        //        }
-        // }
-
-         minimum=Math.min(levenResult)
+         minimum=Math.min(...levenResult)
  
- 
-         //最小値の出力
-        // for(let i=0; i<levenResult.length; i++){
-        //     console.log(levenResult[i]);
-        //        if(max != 100 && max < levenResult [i]){
-        //                max = levenResult[i]
-        //        }
-	// }
-        max=Math.max(levenResult) 
+         max=Math.max(...levenResult) 
 	 
- 
- 
- 
- 
          average = average /levenResult.length;
-         console.log(average);       //1回のみ入力は配列ないからNanと表示される
+         console.log(average);       
          console.log(minimum);
          console.log(max);
-         //類似度0，100を除外したほうがよい？
 
          
          allAverage=allAverage + average;
@@ -117,10 +94,6 @@ let countMax = 0;
 
          }
 }
-     console.log(allAverage);
-     console.log(countAve);
-console.log(allMinimum);
-console.log(countMin)
      allAverage=allAverage/countAve;
      allMinimum=allMinimum/countMin;
      allMax=allMax/countMax;
