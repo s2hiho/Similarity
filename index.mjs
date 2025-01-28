@@ -58,58 +58,60 @@ let arrMax=[];
          const passwords = users.map(user => user.password)
          console.log(passwords)
 
-         if(passwords.length != 1){
-	 console.log(ip);
-         let levenResult = [];
-         for(let i=0; i+1<passwords.length; i++){
-             levenResult [i] = levenshtein(passwords[i],passwords[i+1]);
+       if(passwords.length > 1){
+	    console.log(ip);
+            let levenResult = [];
+            for(let i=0; i+1<passwords.length; i++){
+               levenResult [i] = levenshtein(passwords[i],passwords[i+1]);
+            }
+            console.log(`類似度の配列: ${levenResult}`);
  
-         }
-         console.log(`類似度の配列: ${levenResult}`);
- 
-         let average=0;
-         let minimum;
-         let max;
+         if(levenResult.length > 0){
+            let average=0;
+            let minimum;
+            let max;
          
-         //平均値の出力
-         for(let i=0; i<levenResult.length; i++){
-
-             average = average + levenResult [i] ;
-         }
+            //平均値の出力
+            for(let i=0; i<levenResult.length; i++){
+                average = average + levenResult [i] ;
+            }
  
-         minimum=Math.min(...levenResult)
+            minimum=Math.min(...levenResult)
  
-         max=Math.max(...levenResult) 
+            max=Math.max(...levenResult) 
 	 
-         average = average /levenResult.length;
-         console.log(average);       
-         console.log(minimum);
-         console.log(max);
-
+            average = average /levenResult.length;
+           // console.log(average);       
+           // console.log(minimum);
+           // console.log(max);
          
-         allAverage=allAverage + average;
-         countAve = countAve + 1;
+           allAverage=allAverage + average;
+           countAve = countAve + 1;
  
-         allMinimum=allMinimum + minimum;
-         countMin = countMin + 1;
+           allMinimum=allMinimum + minimum;
+           countMin = countMin + 1;
 
-         allMax = allMax + max;
-         countMax = countMax + 1;
+           allMax = allMax + max;
+           countMax = countMax + 1;
          
-         arrAve[countArr]=average;
-         arrMin[countArr]=minimum;
-         arrMax[countArr]=max;
-         countArr ++;
+           arrAve[countArr]=average;
+           arrMin[countArr]=minimum;
+           arrMax[countArr]=max;
+           countArr ++;
+
 
          }
+       }  
 }    
-
-    console.log(allAverage);
-    console.log(countAve);
-    console.log(allMinimum);
-    console.log(countMin);
-    console.log(allMax);
-    console.log(countMax);
+     console.log(arrAve);
+     console.log(arrMin);
+     console.log(arrMax);
+     console.log(allAverage);
+     console.log(countAve);
+     console.log(allMinimum);
+     console.log(countMin);
+     console.log(allMax);
+     console.log(countMax);
      allAverage=allAverage/countAve;
      allMinimum=allMinimum/countMin;
      allMax=allMax/countMax;
@@ -117,4 +119,3 @@ let arrMax=[];
      console.log(`平均値：${allAverage}`)
      console.log(`最小値：${allMinimum}`)
      console.log(`最大値：${allMax}`)
-     console.log(arrAve);
