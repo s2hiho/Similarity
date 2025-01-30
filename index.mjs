@@ -56,15 +56,15 @@ let arrMax=[];
 
  for(const [ip, users] of Object.entries(result)){
          const passwords = users.map(user => user.password)
-         console.log(passwords)
+        // console.log(passwords)
 
        if(passwords.length > 1){
-	    console.log(ip);
+	  //  console.log(ip);
             let levenResult = [];
             for(let i=0; i+1<passwords.length; i++){
                levenResult [i] = levenshtein(passwords[i],passwords[i+1]);
             }
-            console.log(`類似度の配列: ${levenResult}`);
+            //console.log(`類似度の配列: ${levenResult}`);
  
          if(levenResult.length > 0){
             let average=0;
@@ -85,15 +85,22 @@ let arrMax=[];
            // console.log(minimum);
            // console.log(max);
          
+           if(!isNaN(average)){
            allAverage=allAverage + average;
            countAve = countAve + 1;
- 
+           }
+
+           if(!isNaN(minimum)){
            allMinimum=allMinimum + minimum;
            countMin = countMin + 1;
+           }
 
+           if(!isNaN(max)){
            allMax = allMax + max;
            countMax = countMax + 1;
-         
+           }
+
+
            arrAve[countArr]=average;
            arrMin[countArr]=minimum;
            arrMax[countArr]=max;
@@ -103,15 +110,15 @@ let arrMax=[];
          }
        }  
 }    
-     console.log(arrAve);
-     console.log(arrMin);
-     console.log(arrMax);
-     console.log(allAverage);
-     console.log(countAve);
-     console.log(allMinimum);
-     console.log(countMin);
-     console.log(allMax);
-     console.log(countMax);
+     //console.log(arrAve);
+     //console.log(arrMin);
+     //console.log(arrMax);
+     //console.log(allAverage);
+     //console.log(countAve);
+     //console.log(allMinimum);
+     //console.log(countMin);
+     //console.log(allMax);
+     //console.log(countMax);
      allAverage=allAverage/countAve;
      allMinimum=allMinimum/countMin;
      allMax=allMax/countMax;
